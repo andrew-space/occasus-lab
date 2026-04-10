@@ -66,6 +66,32 @@ This file is the running history for Round 5. It should let a future session rec
 - **Review agent pass**: Identified and fixed 33 critical DOM ID mismatches between HTML and JS, fixed form submit handling, added missing metric/result elements.
 - **CSS additions**: Usage bar, pro gates/badges, modals, toasts, avatar dropdown, pricing cards, tone analyzer bars, headline score bars, blog page, admin panel, fade-in/delay animations.
 
+## 2026-04-10 — v5 merge and stabilization
+
+- **User-visible issue reported**: Site perceived as broken after UI merge.
+- **v5 merge delivered**: Restored v3 editorial tab UI while keeping v4 scope.
+- **Tools scope now active**: 10 tools total (including Word Counter, Readability, Email Subject, SEO Preview, Social Post PRO).
+- **Gamification added**: XP, levels, streak display, badges, and challenge dashboard.
+- **Blog direction kept**: HubSpot-style cards preserved and integrated into the restored visual system.
+- **Pricing and messaging updated**: Free/Pro matrix aligned with 10-tool offer.
+- **Commit published**: `30b252d` pushed to `main`.
+
+## 2026-04-10 — post-merge hotfix (UX + wiring)
+
+- **Root causes fixed**: UI wiring mismatches and design token inconsistencies (no syntax crash, but behavior regressions).
+- **Functional fixes**:
+- Reconnected Clarity sample loader.
+- Switched Word Counter listener to `input` for live updates on typing and paste.
+- Fixed UTM logic to count usage only after validation and include `utm_term`.
+- Added Firebase guard for upgrade flow to prevent silent failures when config is missing.
+- Aligned Brand tone mapping with current form options (`calm`, `direct`, `warm`).
+- **Design fixes**:
+- Added missing heading font token usage consistency.
+- Replaced hardcoded warning reds with design-system variable.
+- Improved responsive behavior for metrics/nav wrapping.
+- **Validation**: No editor errors in `index.html`, `assets/styles.css`, `assets/app.js` after patch.
+- **Commit published**: `2f1a94e` pushed to `main`.
+
 ## Update Rules
 
 - Append new milestones with date and short rationale.
