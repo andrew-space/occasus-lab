@@ -36,3 +36,9 @@
 1. publish two additional blog posts aligned with neuroscience and cybernetics
 2. create one dedicated page per tool for deeper SEO capture
 3. add structured FAQ block for long-tail search intents
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Blog system is active with HubSpot-style card presentation and cross-linking from homepage.
+- SEO/content continuation should happen after auth/billing configuration is stable to avoid publishing during platform-level changes.
+- Priority for next session: add one short "Setup status" post or changelog note only after Firebase connection is confirmed live.

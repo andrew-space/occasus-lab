@@ -109,6 +109,35 @@ This file is the running history for Round 5. It should let a future session rec
 - **Firebase config files added**: `firebase.json`, `firestore.rules`, `functions/.env.example`, `functions/README.md`.
 - **Deployment status**: Backend scaffold committed locally and pending Firebase project env wiring before full payment activation.
 
+## 2026-04-10 — final handoff before shutdown
+
+- **User-visible state**: App is live on the new URL but currently reports Firebase not connected.
+- **Root cause confirmed**: `site/assets/firebase-config.js` still has empty `FIREBASE_CONFIG` fields.
+- **Repository migration complete**:
+- New canonical repo: `https://github.com/andrew-space/occasus-lab`
+- New canonical Pages URL: `https://andrew-space.github.io/occasus-lab/`
+- **Firebase tooling status**:
+- Firebase CLI installed (`firebase-tools 15.14.0`) via `firebase.cmd`.
+- Local helper created: `scripts/firebase-setup.ps1`.
+- `.firebaserc` baseline created with placeholder project id.
+- **Backend/security status**:
+- Secure checkout scaffold in `functions/index.js`.
+- Firestore rules and security workflow in place.
+- Local security scanner passing.
+- **Exact resume sequence for next session**:
+1. Run `firebase login`.
+2. Run `firebase use --add` and set real project.
+3. Fill `site/assets/firebase-config.js` with real Firebase web config.
+4. Replace backend endpoint placeholder project id in `site/assets/firebase-config.js`.
+5. Set Stripe runtime env vars (do not commit secrets).
+6. Deploy: `firebase deploy --only functions,firestore:rules`.
+7. Push frontend config update to `occasus-lab` and verify auth on live URL.
+8. Confirm Security Guardian workflow green.
+
+- **Latest repo state for continuity**:
+- Recent setup commit pushed to `occasus-lab`: `6015b6d`.
+- Agent/security rollout commits were pushed before handoff on same branch.
+
 ## Update Rules
 
 - Append new milestones with date and short rationale.

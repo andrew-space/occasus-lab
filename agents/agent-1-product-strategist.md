@@ -48,3 +48,10 @@ Occasus Lab helps users move from chaos to clarity in minutes with practical too
 ## Next strategic step
 
 Replace rule-based rewriting with real LLM calls once backend and quotas are defined.
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Canonical product URL moved to: https://andrew-space.github.io/occasus-lab/
+- Product scope remains: 10-tool freemium suite with gamification.
+- Strategic blocker to resolve first next session: Firebase is still not configured in deployed frontend (`firebase-config.js` has empty project fields).
+- Immediate next action on resume: fill Firebase web config + authorized domains, then validate Google Sign-In on deployed URL.

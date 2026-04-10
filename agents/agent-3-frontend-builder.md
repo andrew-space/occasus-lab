@@ -52,3 +52,10 @@
 ## Next engineering step
 
 Add lightweight state persistence in localStorage so users can keep their last tool outputs between refreshes.
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Frontend is connected to secure billing flow contract: upgrade now calls backend checkout endpoint (`BACKEND_CONFIG.checkoutEndpoint`) instead of direct client Pro write.
+- Current live issue source is configuration, not code: `site/assets/firebase-config.js` still has empty Firebase keys.
+- Backend endpoint placeholder is in place and must be replaced with real project id.
+- First action on resume: update `site/assets/firebase-config.js`, push to `occasus-lab`, and re-test auth + upgrade modal flow.

@@ -67,3 +67,9 @@ The blog pipeline is:
 
 Follow this pipeline strictly. Do not skip the NotebookLM synthesis step.
 ```
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Editorial pipeline remains valid and should continue after platform auth setup is completed.
+- Blog production is not blocked technically, but operationally deferred until Firebase sign-in is confirmed on live URL.
+- Next action when resuming content work: generate one new article that outputs one concrete tool rule and update blog index card.

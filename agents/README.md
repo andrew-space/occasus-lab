@@ -76,4 +76,11 @@ The fastest demo flow is: paste weak copy into the Clarity Rewriter, show the im
 - UTM Builder for campaign hygiene
 - First blog article connected to the product logic
 - GitHub Pages workflow prepared in `.github/workflows/deploy.yml`
-- GitHub repo created at `https://github.com/andrew-space/ai-challenge-round5-studio-occasus`
+- Canonical GitHub repo: `https://github.com/andrew-space/occasus-lab`
+
+## Handoff Quickstart (Next Session)
+
+1. Open live app: https://andrew-space.github.io/occasus-lab/
+2. Fix Firebase config in `site/assets/firebase-config.js` (currently empty keys).
+3. Run Firebase auth/deploy sequence (`firebase login`, `firebase use --add`, deploy functions/rules).
+4. Run security checks before release (`scripts/security-scan.ps1` and Security Guardian workflow).

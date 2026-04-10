@@ -62,3 +62,12 @@ Conversion goal: Free tool usage → Google Sign-In → daily limit → Pro upgr
 
 Be specific. "Improve the CTA" is not acceptable. "Change 'Learn more' to 'Rewrite your first headline — free' because it previews the outcome and reduces uncertainty" is acceptable.
 ```
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Review cycle already applied and major regressions fixed (UI wiring, responsiveness, usage flow).
+- Priority for next review pass: post-Firebase validation on deployed URL with real auth states.
+- Mandatory next-session review scope:
+1. Auth UX (popup, avatar menu, sign-out)
+2. Free limit behavior after login
+3. Upgrade path (checkout request + error handling)

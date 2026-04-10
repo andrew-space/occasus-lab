@@ -43,3 +43,12 @@ Protect Round 5 against security regressions and API bad practices at every iter
 ## Escalation policy
 
 If any mandatory check fails, block release and report exact file, line, and remediation path.
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Security workflow is configured and running on `occasus-lab` repository.
+- Local security scan script passes after excluding `.env.example` false positives.
+- Next-session security priority:
+1. Verify no real secret was inserted when filling Firebase config.
+2. Verify Stripe env vars are set only in runtime environment, never committed.
+3. Re-run security workflow and confirm green before any release tag.

@@ -97,3 +97,14 @@ There is no server-side code — everything runs in the browser.
 Security rules are your primary defense. Design them carefully.
 The app must gracefully degrade when Firebase is unavailable.
 ```
+
+## Handoff - 2026-04-10 (Session Close)
+
+- Firebase + Stripe backend scaffold exists in `functions/` and Firestore rules exist at repository root.
+- CLI setup baseline completed locally (`firebase.cmd` available), but Firebase account is not logged in yet.
+- Frontend currently shows "Firebase not configured" because `site/assets/firebase-config.js` still contains empty Firebase keys.
+- First actions on resume:
+1. Run `firebase login`.
+2. Bind real project id via `firebase use --add`.
+3. Fill Firebase web config and backend endpoint project id.
+4. Deploy functions + firestore rules.
