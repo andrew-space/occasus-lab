@@ -10,12 +10,12 @@
    ═══════════════════════════════════════════════════ */
 
 var FIREBASE_CONFIG = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyDa4A2WWxtoa8DMEitITRmOF9yZ7iVWapI",
+  authDomain: "studio-occasus.firebaseapp.com",
+  projectId: "studio-occasus",
+  storageBucket: "studio-occasus.firebasestorage.app",
+  messagingSenderId: "635904077616",
+  appId: "1:635904077616:web:93e0805d3bcf3b12c2a2f5"
 };
 
 /* Freemium limits */
@@ -36,5 +36,5 @@ var PRO_PRICE = { monthly: 9, yearly: 79, currency: "€" };
 
 /* Server-side billing endpoint (Firebase Functions) */
 var BACKEND_CONFIG = {
-  checkoutEndpoint: "https://europe-west1-REPLACE_WITH_FIREBASE_PROJECT_ID.cloudfunctions.net/createCheckoutSession"
+  checkoutEndpoint: "https://europe-west1-studio-occasus.cloudfunctions.net/createCheckoutSession"
 };

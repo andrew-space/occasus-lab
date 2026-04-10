@@ -8,6 +8,16 @@
   var currentUser = null;
   var ADMIN_EMAILS = ["andrew.neuburger@community.isunet.edu", "andrew.neuburger@isunet.edu"];
 
+  function mapAuthError(err) {
+    if (!err || !err.code) return "Sign-in error.";
+    if (err.code === "auth/popup-closed-by-user") return "Sign-in popup was closed.";
+    if (err.code === "auth/unauthorized-domain") {
+      return "Unauthorized domain. Add " + window.location.hostname + " in Firebase Authentication > Settings > Authorized domains.";
+    }
+    if (err.code === "auth/operation-not-allowed") return "Google provider is disabled in Firebase Authentication.";
+    return err.message || err.code;
+  }
+
   function init() {
     if (typeof FIREBASE_CONFIG === "undefined" || !FIREBASE_CONFIG.apiKey) {
       document.getElementById("admin-gate").innerHTML =
@@ -36,8 +46,13 @@
 
     document.getElementById("admin-google-signin").addEventListener("click", function () {
       var provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
       auth.signInWithPopup(provider).catch(function (err) {
         console.error("Admin sign-in error:", err);
+        var gate = document.getElementById("admin-gate");
+        if (gate && err.code !== "auth/popup-closed-by-user") {
+          gate.innerHTML = "<h2>Sign-in failed</h2><p>" + esc(mapAuthError(err)) + "</p>";
+        }
       });
     });
 

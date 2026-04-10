@@ -63,6 +63,42 @@
   }
   function saveGamification(g) { localStorage.setItem("occ_gamify", JSON.stringify(g)); }
 
+  function pruneDailyTools(g) {
+    if (!g.dailyTools) return;
+    var keys = Object.keys(g.dailyTools).sort();
+    if (keys.length <= 30) return;
+    keys.slice(0, keys.length - 30).forEach(function (k) { delete g.dailyTools[k]; });
+  }
+
+  function getConsecutivePowerDays(g) {
+    var daily = g.dailyTools || {};
+    var days = Object.keys(daily).sort();
+    if (!days.length) return 0;
+    var streak = 0;
+    var prev = null;
+    for (var i = 0; i < days.length; i++) {
+      var day = days[i];
+      var tools = daily[day] || {};
+      var used = Object.keys(tools).length;
+      if (used < 3) {
+        streak = 0;
+        prev = day;
+        continue;
+      }
+      if (!prev) {
+        streak = 1;
+        prev = day;
+        continue;
+      }
+      var prevDate = new Date(prev);
+      var currDate = new Date(day);
+      var diff = Math.round((currDate - prevDate) / 86400000);
+      streak = (diff === 1) ? streak + 1 : 1;
+      prev = day;
+    }
+    return streak;
+  }
+
   function initStreak() {
     var g = getGamification();
     var today = todayKey();
@@ -80,11 +116,16 @@
   function addXP(amount, tool) {
     var g = getGamification();
     g.xp = (g.xp || 0) + amount;
-    g.lastDay = todayKey();
+    var today = todayKey();
+    g.lastDay = today;
     if (tool) {
       if (!g.toolsUsed) g.toolsUsed = {};
       g.toolsUsed[tool] = (g.toolsUsed[tool] || 0) + 1;
+      if (!g.dailyTools) g.dailyTools = {};
+      if (!g.dailyTools[today]) g.dailyTools[today] = {};
+      g.dailyTools[today][tool] = true;
     }
+    pruneDailyTools(g);
     saveGamification(g);
     checkBadges();
     updateGamificationUI();
@@ -98,9 +139,19 @@
   function checkBadges() {
     var g = getGamification();
     if (!g.badges) g.badges = [];
-    var u = getUsage();
     var tu = g.toolsUsed || {};
     var earned = [];
+    var today = todayKey();
+
+    if (!g.dailyTools) g.dailyTools = {};
+
+    /* Daily challenge bonus: one-time +50 XP once 3 different tools are used in a day */
+    var todayTools = g.dailyTools[today] ? Object.keys(g.dailyTools[today]).length : 0;
+    if (todayTools >= 3 && g.dailyChallengeBonusDate !== today) {
+      g.xp = (g.xp || 0) + 50;
+      g.dailyChallengeBonusDate = today;
+      toast("Daily challenge complete! +50 XP", "success");
+    }
 
     if (g.badges.indexOf("first-draft") === -1 && Object.keys(tu).length > 0) earned.push("first-draft");
     if (g.badges.indexOf("daily-grinder") === -1 && (g.streak || 0) >= 7) earned.push("daily-grinder");
@@ -109,13 +160,18 @@
       var usedAll = allTools.every(function (t) { return (tu[t] || 0) > 0; });
       if (usedAll) earned.push("tool-explorer");
     }
+    if (g.badges.indexOf("headline-hero") === -1 && g.headlineHeroUnlocked) earned.push("headline-hero");
     if (g.badges.indexOf("clarity-master") === -1 && (tu.clarity || 0) >= 20) earned.push("clarity-master");
     if (g.badges.indexOf("word-wizard") === -1 && (g.totalWords || 0) >= 10000) earned.push("word-wizard");
+    if (g.badges.indexOf("power-user") === -1 && getConsecutivePowerDays(g) >= 5) earned.push("power-user");
+    if (g.badges.indexOf("perfectionist") === -1 && (g.sameTextClarityStreak || 0) >= 3) earned.push("perfectionist");
 
     if (earned.length) {
       g.badges = g.badges.concat(earned);
       saveGamification(g);
       earned.forEach(function (b) { showBadgeUnlock(b); });
+    } else {
+      saveGamification(g);
     }
   }
 
@@ -271,6 +327,18 @@
   }
 
   /* ── OccApp global (called from HTML) ────────── */
+  function mapAuthError(err) {
+    if (!err || !err.code) return "Sign-in error.";
+    if (err.code === "auth/popup-closed-by-user") return "Sign-in popup was closed.";
+    if (err.code === "auth/unauthorized-domain") {
+      var host = window.location.hostname;
+      return "Unauthorized domain. Add " + host + " in Firebase Authentication > Settings > Authorized domains.";
+    }
+    if (err.code === "auth/operation-not-allowed") return "Google provider is disabled in Firebase Authentication.";
+    if (err.code === "auth/network-request-failed") return "Network error during sign-in.";
+    return "Sign-in error: " + (err.message || err.code);
+  }
+
   window.OccApp = {
     showAuthModal: function () {
       var m = document.getElementById("auth-modal");
@@ -282,11 +350,12 @@
     googleSignIn: function () {
       if (!firebaseReady) { toast("Firebase not configured", "error"); return; }
       var provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
       auth.signInWithPopup(provider).then(function () {
         window.OccApp.closeModals();
         toast("Welcome back!", "success");
       }).catch(function (err) {
-        if (err.code !== "auth/popup-closed-by-user") toast("Sign-in error: " + err.message, "error");
+        if (err.code !== "auth/popup-closed-by-user") toast(mapAuthError(err), "error");
       });
     },
     signOut: function () {
@@ -494,6 +563,15 @@
     var notesList = document.getElementById("clarity-notes");
     notesList.innerHTML = "";
     result.notes.forEach(function (n) { var li = document.createElement("li"); li.textContent = n; notesList.appendChild(li); });
+
+    var g = getGamification();
+    var normalized = (text || "").trim().toLowerCase().replace(/\s+/g, " ");
+    if (normalized && normalized === g.lastClarityText) g.sameTextClarityStreak = (g.sameTextClarityStreak || 0) + 1;
+    else g.sameTextClarityStreak = 1;
+    g.lastClarityText = normalized;
+    saveGamification(g);
+    checkBadges();
+
     toast("Clarity analysis complete", "success");
   }
 
@@ -694,6 +772,14 @@
       var wrap2 = document.getElementById("headline-result-2-wrap");
       if (wrap2) wrap2.classList.add("hidden");
     }
+
+    if ((s1 && s1.grade === "A") || (h2 && s2 && s2.grade === "A")) {
+      var g = getGamification();
+      g.headlineHeroUnlocked = true;
+      saveGamification(g);
+      checkBadges();
+    }
+
     toast("Headlines scored", "success");
   }
 
