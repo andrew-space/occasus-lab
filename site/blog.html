@@ -1,103 +1,160 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Occasus Lab</title>
-  <meta name="description" content="Research-driven articles that feed directly into Occasus Lab's clarity tools. Powered by NotebookLM synthesis.">
+  <title>Blog — Occasus Lab</title>
+  <meta name="description" content="Marketing insights, strategies, and tactics from the Occasus Lab editorial team.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="assets/images/occasus-icon.svg" type="image/svg+xml">
 </head>
 <body>
-  <header class="nav">
+
+  <!-- NAV -->
+  <nav class="nav">
     <div class="nav__inner">
-      <a class="nav__brand" href="index.html"><img src="assets/studio-occasus-logo.png" alt="Studio Occasus" height="36"></a>
-      <nav class="nav__links"><a href="index.html#tools" class="nav__link">Tools</a><a href="index.html#pricing" class="nav__link">Pricing</a><a href="blog.html" class="nav__link active">Blog</a></nav>
-      <a class="btn btn--sm btn--primary" href="index.html#tools">Try tools</a>
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/occasus-icon.svg" alt="">Occasus Lab
+      </a>
+      <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+      <ul class="nav__links" id="main-nav">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="blog.html" style="color:var(--accent2);font-weight:700;">Blog</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
-  <main class="blog-page">
-    <section class="blog-hero">
-      <span class="tag">The Occasus Lab Editorial</span>
-      <h1>Research that builds better tools.</h1>
-      <p>Every article follows the same loop: discover a scientific insight, translate it into a product rule, and publish it so the tools keep improving.</p>
-    </section>
+  <!-- BLOG HERO -->
+  <section class="hero" style="padding-bottom:2rem;">
+    <p class="section-label">The Occasus Blog</p>
+    <h1>Marketing <span>Insights</span></h1>
+    <p>Strategies, tactics, and perspectives to sharpen your marketing edge.</p>
+  </section>
 
-    <!-- ── Pipeline explainer ────────────────────── -->
-    <section class="blog-pipeline">
-      <div class="pipeline-step">
-        <span class="flow__num">1</span>
-        <h3>Academic Paper</h3>
-        <p>Select peer-reviewed research on cognition, communication, or behavior.</p>
-      </div>
-      <span class="flow__arrow">&rarr;</span>
-      <div class="pipeline-step">
-        <span class="flow__num">2</span>
-        <h3>NotebookLM Synthesis</h3>
-        <p>Feed papers into a Google NotebookLM knowledge base for grounded Q&amp;A.</p>
-      </div>
-      <span class="flow__arrow">&rarr;</span>
-      <div class="pipeline-step">
-        <span class="flow__num">3</span>
-        <h3>Editorial Article</h3>
-        <p>Translate the synthesis into a 5-section article with product integration.</p>
-      </div>
-      <span class="flow__arrow">&rarr;</span>
-      <div class="pipeline-step">
-        <span class="flow__num">4</span>
-        <h3>Tool Update</h3>
-        <p>Each article generates new rules that improve the Clarity Rewriter and beyond.</p>
-      </div>
-    </section>
-
-    <!-- ── Article Grid ──────────────────────────── -->
-    <section class="blog-grid blog-grid--full">
-      <a class="blog-card" href="cognitive-load-clarity.html">
-        <span class="tag">Neuroscience</span>
-        <h3>Cognitive Load and Why Clear Messaging Wins</h3>
-        <p>A practical reading of cognitive load theory: what it means, why overloaded copy creates friction, and how product rules convert research into better communication.</p>
-        <div class="blog-card__meta">
-          <span>Article 01</span>
-          <span>Feeds: Clarity Rewriter</span>
+  <!-- FEATURED ARTICLE -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <a href="cognitive-load-clarity.html" class="blog-card blog-card--featured">
+        <img class="blog-card__img" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80" alt="Cognitive Load in Marketing">
+        <div class="blog-card__content">
+          <span class="blog-card__cat">Content Strategy</span>
+          <h2 class="blog-card__title">Cognitive Load &amp; Clarity: Why Less Copy Converts More</h2>
+          <p class="blog-card__excerpt">
+            Your audience has 8 seconds. Learn how cognitive load theory reshapes the way we write 
+            headlines, CTAs, and landing pages — and why simplicity is the ultimate sophistication 
+            in modern marketing.
+          </p>
+          <div class="blog-card__footer">
+            <span class="blog-card__author">Occasus Editorial</span>
+            <span class="blog-card__dot">·</span>
+            <span>Jun 2025</span>
+            <span class="blog-card__dot">·</span>
+            <span>6 min read</span>
+          </div>
+          <span class="blog-card__link">Read article</span>
         </div>
       </a>
-      <a class="blog-card" href="signal-noise-marketing.html">
-        <span class="tag">Cybernetics</span>
-        <h3>Signal vs. Noise: The Cybernetic Filter for Marketing</h3>
-        <p>How cybernetics teaches us to amplify signal and dampen noise in every campaign layer — from headline to CTA.</p>
-        <div class="blog-card__meta">
-          <span>Article 02</span>
-          <span>Feeds: Tone Analyzer</span>
+    </div>
+  </section>
+
+  <!-- ALL ARTICLES -->
+  <section class="blog-section">
+    <div class="container">
+      <p class="section-label">Latest Articles</p>
+      <h2 style="margin-bottom:1.5rem;">From the Editorial Desk</h2>
+      <div class="blog-grid">
+
+        <!-- Article 1 -->
+        <a href="signal-noise-marketing.html" class="blog-card">
+          <img class="blog-card__img" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=80" alt="Signal vs Noise">
+          <div class="blog-card__content">
+            <span class="blog-card__cat">Marketing Strategy</span>
+            <h3 class="blog-card__title">Signal vs. Noise: Cutting Through Digital Clutter</h3>
+            <p class="blog-card__excerpt">In a world of infinite content, standing out requires precision, not volume. A framework for marketing that actually gets heard.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__author">Occasus Editorial</span>
+              <span class="blog-card__dot">·</span>
+              <span>Jun 2025</span>
+              <span class="blog-card__dot">·</span>
+              <span>5 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 2 — placeholder -->
+        <div class="blog-card" style="opacity:0.6;">
+          <img class="blog-card__img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Analytics">
+          <div class="blog-card__content">
+            <span class="blog-card__cat">Analytics</span>
+            <h3 class="blog-card__title">The Metrics That Actually Matter in 2025</h3>
+            <p class="blog-card__excerpt">Vanity metrics are dead. Here are the 7 KPIs that predict real growth for marketing teams.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__author">Occasus Editorial</span>
+              <span class="blog-card__dot">·</span>
+              <span>Coming Soon</span>
+            </div>
+          </div>
         </div>
-      </a>
-      <div class="blog-card blog-card--soon">
-        <span class="tag">Behavioral Science</span>
-        <h3>The Feedback Loop: How Usage Data Improves the Tools</h3>
-        <p>A behind-the-scenes look at how Occasus Lab evolves from every rewrite, every headline scored, and every message generated.</p>
-        <div class="blog-card__meta">
-          <span>Coming soon</span>
-          <span>Feeds: All tools</span>
+
+        <!-- Article 3 — placeholder -->
+        <div class="blog-card" style="opacity:0.6;">
+          <img class="blog-card__img" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80" alt="Social Media">
+          <div class="blog-card__content">
+            <span class="blog-card__cat">Social Media</span>
+            <h3 class="blog-card__title">Platform-Native Content: Stop Cross-Posting</h3>
+            <p class="blog-card__excerpt">Why the same message fails on X, LinkedIn, and Instagram — and how to adapt without tripling your workload.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__author">Occasus Editorial</span>
+              <span class="blog-card__dot">·</span>
+              <span>Coming Soon</span>
+            </div>
+          </div>
         </div>
+
+        <!-- Article 4 — placeholder -->
+        <div class="blog-card" style="opacity:0.6;">
+          <img class="blog-card__img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80" alt="Email">
+          <div class="blog-card__content">
+            <span class="blog-card__cat">Email Marketing</span>
+            <h3 class="blog-card__title">Subject Lines That Don't Get Ignored</h3>
+            <p class="blog-card__excerpt">From character count to urgency triggers — the science behind subject lines with 40%+ open rates.</p>
+            <div class="blog-card__footer">
+              <span class="blog-card__author">Occasus Editorial</span>
+              <span class="blog-card__dot">·</span>
+              <span>Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </section>
 
-    <!-- ── NotebookLM CTA ────────────────────────── -->
-    <section class="cta-banner">
-      <span class="tag">Powered by</span>
-      <h2>Google NotebookLM</h2>
-      <p>Our editorial pipeline uses NotebookLM to synthesize academic papers into grounded knowledge bases &mdash; ensuring every article stays citation-accurate and every tool rule is traceable to peer-reviewed research.</p>
-      <a class="btn btn--primary btn--lg" href="https://notebooklm.google/" target="_blank" rel="noopener">Explore NotebookLM &rarr;</a>
-    </section>
-  </main>
+      <!-- NEWSLETTER CTA -->
+      <div class="newsletter">
+        <h3>Get Marketing Edge</h3>
+        <p>Weekly insights on strategy, tools, and trends — no fluff.</p>
+        <form class="newsletter__form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('Thanks for subscribing!');">
+          <input class="newsletter__input" type="email" placeholder="your@email.com" required>
+          <button class="newsletter__btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer__inner">
-      <div class="footer__brand"><img src="assets/studio-occasus-logo.png" alt="Studio Occasus" height="28"><p>Occasus Lab</p></div>
-      <div class="footer__links"><a href="index.html">Home</a><a href="index.html#tools">Tools</a><a href="blog.html">Blog</a></div>
+    <div class="container">
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#pricing">Pricing</a>
+      </div>
+      <p>&copy; 2025 Occasus Lab — Marketing tools for sharp minds.</p>
     </div>
   </footer>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,82 +6,104 @@
   <title>Signal vs. Noise: The Cybernetic Filter | Occasus Lab</title>
   <meta name="description" content="How cybernetics teaches marketers to amplify signal and dampen noise in every campaign layer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="assets/images/occasus-icon.svg" type="image/svg+xml">
+  <style>
+    .article-layout { max-width:760px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    .article-hero-img { width:100%; height:320px; object-fit:cover; border-radius:var(--radius); margin-bottom:2rem; }
+    .article-meta { display:flex; align-items:center; gap:0.75rem; font-size:0.8rem; color:var(--muted); margin-bottom:1.5rem; flex-wrap:wrap; }
+    .article-meta__cat { font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:0.08em; font-size:0.7rem; }
+    .article-back { display:inline-block; margin-bottom:1.5rem; font-size:0.85rem; font-weight:600; color:var(--accent2); }
+    .article-back:hover { color:var(--ink); }
+    .article-body h2 { font-family:var(--font-display); margin:2rem 0 0.75rem; font-size:1.5rem; }
+    .article-body p { margin-bottom:1rem; line-height:1.8; }
+    .article-body ul { margin:0.75rem 0 1.25rem 1.5rem; }
+    .article-body li { margin-bottom:0.5rem; line-height:1.7; }
+    .article-body blockquote { border-left:3px solid var(--accent); padding-left:1rem; margin:1rem 0; font-style:italic; color:var(--muted); }
+  </style>
 </head>
 <body>
-  <header class="nav">
+  <nav class="nav">
     <div class="nav__inner">
-      <a class="nav__brand" href="index.html"><img src="assets/studio-occasus-logo.png" alt="Studio Occasus" height="36"></a>
-      <nav class="nav__links"><a href="index.html#tools" class="nav__link">Tools</a><a href="blog.html" class="nav__link">Blog</a></nav>
-      <a class="btn btn--sm btn--primary" href="index.html#tools">Try tools</a>
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/occasus-icon.svg" alt="">Occasus Lab
+      </a>
+      <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+      <ul class="nav__links" id="main-nav">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
-  <main class="article-layout">
-    <a class="article-back btn btn--ghost btn--sm" href="blog.html">&larr; Back to Blog</a>
+  <div class="article-layout">
+    <a class="article-back" href="blog.html">&larr; Back to blog</a>
+    <img class="article-hero-img" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=900&q=80" alt="Signal vs Noise in Marketing">
+    <div class="article-meta">
+      <span class="article-meta__cat">Marketing Strategy</span>
+      <span>&middot;</span><span>Occasus Editorial</span>
+      <span>&middot;</span><span>Jun 2025</span>
+      <span>&middot;</span><span>5 min read</span>
+    </div>
 
-    <section class="article-hero">
-      <span class="tag">Article 02 &mdash; Cybernetics</span>
+    <header>
       <h1>Signal vs. Noise: The Cybernetic Filter for Marketing</h1>
-      <p class="hero__sub">How feedback loops and information theory from the 1940s can make your campaigns clearer today.</p>
-    </section>
+      <p style="font-size:1.1rem;color:var(--muted);margin:1rem 0 2rem;">
+        How feedback loops and information theory from the 1940s can make your campaigns clearer today.
+      </p>
+    </header>
 
-    <div class="article-body">
-      <article class="article-block">
-        <h2>The Scientific Concept</h2>
-        <p>Norbert Wiener defined cybernetics as "the science of communication and control in the animal and the machine" (1948). At its core, cybernetics studies how systems regulate themselves through feedback loops. Claude Shannon, working at Bell Labs, formalized the concept of <strong>signal-to-noise ratio</strong>: every communication channel carries useful information (signal) alongside random interference (noise).</p>
-        <p>The higher the noise, the harder it is to decode the signal. This principle applies to radio waves, neural pathways, and&nbsp;&mdash; marketing messages.</p>
-      </article>
+    <main class="article-body">
+      <h2>The Scientific Concept</h2>
+      <p>Norbert Wiener defined cybernetics as "the science of communication and control in the animal and the machine" (1948). At its core, cybernetics studies how systems regulate themselves through feedback loops. Claude Shannon, working at Bell Labs, formalized the concept of <strong>signal-to-noise ratio</strong>: every communication channel carries useful information (signal) alongside random interference (noise).</p>
+      <p>The higher the noise, the harder it is to decode the signal. This principle applies to radio waves, neural pathways, and&nbsp;&mdash; marketing messages.</p>
 
-      <article class="article-block">
-        <h2>The Simple Explanation</h2>
-        <p>Imagine you are in a crowded room trying to hear one person speak. The voices around you are noise. The person you want to hear is signal. To improve understanding, you can either:</p>
-        <ul>
-          <li><strong>Increase signal</strong> &mdash; speak louder, clearer, closer.</li>
-          <li><strong>Reduce noise</strong> &mdash; move to a quieter room, remove distractions.</li>
-        </ul>
-        <p>Marketing works the same way. Every extra adjective, vague claim, or unnecessary feature mention adds noise. Every concrete benefit, clear verb, and specific number adds signal.</p>
-      </article>
+      <h2>The Simple Explanation</h2>
+      <p>Imagine you are in a crowded room trying to hear one person speak. The voices around you are noise. The person you want to hear is signal. To improve understanding, you can either:</p>
+      <ul>
+        <li><strong>Increase signal</strong> &mdash; speak louder, clearer, closer.</li>
+        <li><strong>Reduce noise</strong> &mdash; move to a quieter room, remove distractions.</li>
+      </ul>
+      <p>Marketing works the same way. Every extra adjective, vague claim, or unnecessary feature mention adds noise. Every concrete benefit, clear verb, and specific number adds signal.</p>
 
-      <article class="article-block">
-        <h2>Marketing Application</h2>
-        <p>When a founder writes "our innovative, cutting-edge platform leverages synergies to deliver holistic solutions," the signal-to-noise ratio is nearly zero. The reader cannot extract <em>what the product does</em> from <em>how the founder feels about it</em>.</p>
-        <p>Cybernetic marketing means treating every campaign element as a feedback system:</p>
-        <ul>
-          <li><strong>Headline</strong>: Does it pass the "blink test"? If someone reads it in 1.5 seconds, do they know what you do?</li>
-          <li><strong>Body copy</strong>: Does each sentence add new information, or repeat what was already said?</li>
-          <li><strong>CTA</strong>: Is the action clear, specific, and immediate?</li>
-          <li><strong>Visual hierarchy</strong>: Does layout guide the eye from signal to signal, without detours?</li>
-        </ul>
-      </article>
+      <h2>Marketing Application</h2>
+      <p>When a founder writes "our innovative, cutting-edge platform leverages synergies to deliver holistic solutions," the signal-to-noise ratio is nearly zero. The reader cannot extract <em>what the product does</em> from <em>how the founder feels about it</em>.</p>
+      <p>Cybernetic marketing means treating every campaign element as a feedback system:</p>
+      <ul>
+        <li><strong>Headline</strong>: Does it pass the "blink test"? If someone reads it in 1.5 seconds, do they know what you do?</li>
+        <li><strong>Body copy</strong>: Does each sentence add new information, or repeat what was already said?</li>
+        <li><strong>CTA</strong>: Is the action clear, specific, and immediate?</li>
+        <li><strong>Visual hierarchy</strong>: Does layout guide the eye from signal to signal, without detours?</li>
+      </ul>
 
-      <article class="article-block">
-        <h2>Product Integration</h2>
-        <p>This article directly feeds two Occasus Lab tools:</p>
-        <ul>
-          <li><strong>Tone Analyzer</strong>: Classification of text into formal, casual, technical, and persuasive categories mirrors the signal decomposition concept. Each tone category is a "channel," and imbalance between them creates noise.</li>
-          <li><strong>Clarity Rewriter</strong>: The jargon replacement map is a noise filter. Every synonym swap (e.g., "leverage" → "use") increases the signal-to-noise ratio of the output.</li>
-        </ul>
-        <p>The cybernetic rule encoded: <em>"For every sentence, maximize new information per word and minimize decorative repetition."</em></p>
-      </article>
+      <h2>Product Integration</h2>
+      <p>This article directly feeds two Occasus Lab tools:</p>
+      <ul>
+        <li><strong>Tone Analyzer</strong>: Classification of text into formal, casual, technical, and persuasive categories mirrors the signal decomposition concept. Each tone category is a "channel," and imbalance between them creates noise.</li>
+        <li><strong>Clarity Rewriter</strong>: The jargon replacement map is a noise filter. Every synonym swap (e.g., "leverage" &rarr; "use") increases the signal-to-noise ratio of the output.</li>
+      </ul>
+      <p>The cybernetic rule encoded: <em>"For every sentence, maximize new information per word and minimize decorative repetition."</em></p>
 
-      <article class="article-block">
-        <h2>Concrete Example</h2>
-        <p><strong>Before (low signal):</strong></p>
-        <blockquote>"Our innovative platform seamlessly integrates robust analytics with cutting-edge AI to deliver best-in-class marketing insights that empower teams to optimize their strategic initiatives."</blockquote>
-        <p><strong>After (high signal):</strong></p>
-        <blockquote>"Our platform shows you which campaigns work and why, using AI to surface patterns humans miss."</blockquote>
-        <p><strong>Signal gained:</strong> 6 concrete words replaced 14 abstract ones. The reader now knows exactly what the product does (shows campaign performance, uses AI for pattern detection) instead of how the founder <em>feels</em> about it (innovative, seamless, robust).</p>
-      </article>
-    </div>
-  </main>
+      <h2>Concrete Example</h2>
+      <p><strong>Before (low signal):</strong></p>
+      <blockquote>"Our innovative platform seamlessly integrates robust analytics with cutting-edge AI to deliver best-in-class marketing insights that empower teams to optimize their strategic initiatives."</blockquote>
+      <p><strong>After (high signal):</strong></p>
+      <blockquote>"Our platform shows you which campaigns work and why, using AI to surface patterns humans miss."</blockquote>
+      <p><strong>Signal gained:</strong> 6 concrete words replaced 14 abstract ones. The reader now knows exactly what the product does (shows campaign performance, uses AI for pattern detection) instead of how the founder <em>feels</em> about it (innovative, seamless, robust).</p>
+    </main>
+  </div>
 
-  <footer class="footer" style="max-width:960px;margin:0 auto;">
-    <div class="footer__inner">
-      <div class="footer__brand"><img src="assets/studio-occasus-logo.png" alt="Studio Occasus" height="28"><p>Occasus Lab</p></div>
-      <div class="footer__links"><a href="index.html">Home</a><a href="blog.html">Blog</a></div>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#pricing">Pricing</a>
+      </div>
+      <p>&copy; 2025 Occasus Lab — Marketing tools for sharp minds.</p>
     </div>
   </footer>
 </body>

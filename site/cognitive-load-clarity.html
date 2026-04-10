@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,90 +6,97 @@
   <title>Cognitive Load and Why Clear Messaging Wins | Occasus Lab</title>
   <meta name="description" content="How cognitive load affects understanding, and how Occasus Lab turns the insight into product rules for clearer marketing.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="assets/images/occasus-icon.svg" type="image/svg+xml">
+  <style>
+    .article-layout { max-width:760px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    .article-hero-img { width:100%; height:320px; object-fit:cover; border-radius:var(--radius); margin-bottom:2rem; }
+    .article-meta { display:flex; align-items:center; gap:0.75rem; font-size:0.8rem; color:var(--muted); margin-bottom:1.5rem; flex-wrap:wrap; }
+    .article-meta__cat { font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:0.08em; font-size:0.7rem; }
+    .article-back { display:inline-block; margin-bottom:1.5rem; font-size:0.85rem; font-weight:600; color:var(--accent2); }
+    .article-back:hover { color:var(--ink); }
+    .article-body h2 { font-family:var(--font-display); margin:2rem 0 0.75rem; font-size:1.5rem; }
+    .article-body p { margin-bottom:1rem; line-height:1.8; }
+    .article-body ul { margin:0.75rem 0 1.25rem 1.5rem; }
+    .article-body li { margin-bottom:0.5rem; line-height:1.7; }
+    .eyebrow { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent2); font-weight:600; margin-bottom:0.5rem; }
+  </style>
 </head>
 <body>
-  <!-- ── Nav ─────────────────────────── -->
   <nav class="nav">
     <div class="nav__inner">
-      <a class="nav__brand" href="index.html"><img src="assets/studio-occasus-logo.png" alt="Occasus Lab"></a>
-      <div class="nav__links">
-        <a class="nav__link" href="index.html#tools">Tools</a>
-        <a class="nav__link" href="blog.html">Blog</a>
-      </div>
-      <div class="nav__auth">
-        <a class="btn btn--sm btn--primary" href="index.html#tools">Try tools</a>
-      </div>
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/occasus-icon.svg" alt="">Occasus Lab
+      </a>
+      <button class="menu-toggle" id="menu-toggle">&#9776;</button>
+      <ul class="nav__links" id="main-nav">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
     </div>
   </nav>
 
   <div class="article-layout">
-    <a class="btn btn--sm btn--ghost article-back" href="blog.html">← Back to blog</a>
+    <a class="article-back" href="blog.html">&larr; Back to blog</a>
+    <img class="article-hero-img" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&q=80" alt="Cognitive Load in Marketing">
+    <div class="article-meta">
+      <span class="article-meta__cat">Content Strategy</span>
+      <span>·</span><span>Occasus Editorial</span>
+      <span>·</span><span>Jun 2025</span>
+      <span>·</span><span>6 min read</span>
+    </div>
 
-    <header class="article-hero fade-in">
+    <header>
       <p class="eyebrow">Article 01 · Research to product</p>
       <h1>Cognitive Load and Why Clear Messaging Wins</h1>
-      <p class="hero-text">
+      <p style="font-size:1.1rem;color:var(--muted);margin:1rem 0 2rem;">
         The more effort a reader needs to decode a message, the less room they have left to understand it.
         That principle is simple, but it changes how a product should write, structure, and prioritize information.
       </p>
     </header>
 
     <main class="article-body">
-      <section class="article-block fade-in delay-1">
-        <p class="card-label">1. Scientific concept</p>
-        <h2>Cognitive load is the cost of processing information.</h2>
-        <p>
-          In practical terms, cognitive load increases when language is dense, when too many ideas are packed together,
-          or when a reader has to infer the point instead of seeing it directly. A high-load message can be accurate and
-          still fail because it demands too much decoding work.
-        </p>
-      </section>
+      <h2>Cognitive load is the cost of processing information.</h2>
+      <p>In practical terms, cognitive load increases when language is dense, when too many ideas are packed together,
+        or when a reader has to infer the point instead of seeing it directly. A high-load message can be accurate and
+        still fail because it demands too much decoding work.</p>
 
-      <section class="article-block fade-in delay-1">
-        <p class="card-label">2. Simple explanation</p>
-        <h2>When copy is hard to process, people stop trusting it.</h2>
-        <p>
-          Readers do not experience overload as a technical issue. They experience it as vagueness, friction, or doubt.
-          If they have to slow down to figure out what a sentence means, they are more likely to skip, bounce, or assume
-          the offer is less clear than it should be.
-        </p>
-      </section>
+      <h2>When copy is hard to process, people stop trusting it.</h2>
+      <p>Readers do not experience overload as a technical issue. They experience it as vagueness, friction, or doubt.
+        If they have to slow down to figure out what a sentence means, they are more likely to skip, bounce, or assume
+        the offer is less clear than it should be.</p>
 
-      <section class="article-block fade-in delay-2">
-        <p class="card-label">3. Marketing application</p>
-        <h2>Clearer writing improves decision-making.</h2>
-        <ul>
-          <li>Shorter sentences lower reading friction.</li>
-          <li>Simpler words reduce ambiguity.</li>
-          <li>One idea per sentence improves retention.</li>
-          <li>A visible hierarchy helps people scan before they commit to reading.</li>
-        </ul>
-      </section>
+      <h2>Clearer writing improves decision-making.</h2>
+      <ul>
+        <li>Shorter sentences lower reading friction.</li>
+        <li>Simpler words reduce ambiguity.</li>
+        <li>One idea per sentence improves retention.</li>
+        <li>A visible hierarchy helps people scan before they commit to reading.</li>
+      </ul>
 
-      <section class="article-block fade-in delay-2">
-        <p class="card-label">4. Product integration</p>
-        <h2>This insight becomes a product rule inside Occasus Lab.</h2>
-        <p>
-          The Clarity Rewriter is designed around this principle. It removes filler, simplifies jargon, splits heavy
-          sentences, and gives the reader a version that keeps the intent while reducing the mental cost required to process it.
-        </p>
-      </section>
+      <h2>This insight becomes a product rule inside Occasus Lab.</h2>
+      <p>The Clarity Rewriter is designed around this principle. It removes filler, simplifies jargon, splits heavy
+        sentences, and gives the reader a version that keeps the intent while reducing the mental cost required to process it.</p>
 
-      <section class="article-block fade-in delay-2">
-        <p class="card-label">5. Concrete example</p>
-        <h2>From abstract promise to usable message.</h2>
-        <p>
-          A phrase like “We leverage a holistic narrative ecosystem to empower scalable differentiation” sounds impressive
-          but requires interpretation. A clearer version would be: “We help brands explain what makes them different, in words people understand quickly.”
-        </p>
-        <p>
-          The second version is not less strategic. It is more usable.
-        </p>
-      </section>
+      <h2>From abstract promise to usable message.</h2>
+      <p>A phrase like "We leverage a holistic narrative ecosystem to empower scalable differentiation" sounds impressive
+        but requires interpretation. A clearer version would be: "We help brands explain what makes them different, in words people understand quickly."</p>
+      <p>The second version is not less strategic. It is more usable.</p>
     </main>
   </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#pricing">Pricing</a>
+      </div>
+      <p>&copy; 2025 Occasus Lab — Marketing tools for sharp minds.</p>
+    </div>
+  </footer>
 </body>
 </html>
