@@ -24,6 +24,7 @@
   --max-w: 1200px;
   --ease: cubic-bezier(.4, 0, .2, 1);
   --transition: 220ms var(--ease);
+  --font-heading: "Cormorant Garamond", Georgia, serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; }
@@ -953,7 +954,7 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
    ═══════════════════════════════════════════════════ */
 
 /* ── Nav Gamification Pills ────────────────────── */
-.nav__right { display: flex; align-items: center; gap: .75rem; }
+.nav__right { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; justify-content: flex-end; }
 .streak-pill, .xp-pill { display: flex; align-items: center; gap: .35rem; background: var(--surface); border: 1.5px solid rgba(0,0,0,.08); border-radius: 999px; padding: .25rem .65rem; font-size: .78rem; font-weight: 500; }
 .streak-pill__fire { font-size: 1rem; }
 .streak-pill__count { color: var(--accent-deep); font-weight: 700; }
@@ -989,9 +990,9 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
 .big-score { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 700; line-height: 1; }
 .score-good { color: #2c9a42; }
 .score-ok { color: var(--accent-deep); }
-.score-bad { color: #d44; }
+.score-bad { color: var(--red); }
 .metric-good { color: #2c9a42; }
-.metric-bad { color: #d44; }
+.metric-bad { color: var(--red); }
 
 /* ── Limit Bar (word counter) ──────────────────── */
 .platform-limits { display: flex; flex-direction: column; gap: .65rem; }
@@ -999,7 +1000,7 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
 .limit-row span { min-width: 80px; color: var(--muted); }
 .limit-bar__track { flex: 1; height: 7px; background: rgba(0,0,0,.06); border-radius: 4px; overflow: hidden; }
 .limit-bar__fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .3s var(--ease); }
-.limit-bar__fill--over { background: #d44; }
+.limit-bar__fill--over { background: var(--red); }
 
 /* ── SERP Preview ──────────────────────────────── */
 .serp-preview { padding: 1rem; background: #fff; border: 1px solid #dfe1e5; border-radius: 8px; font-family: Arial, sans-serif; }
@@ -1045,6 +1046,7 @@ h3 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
   .hero { grid-template-columns: 1fr; min-height: auto; padding: 2rem 1.5rem 3rem; }
   .hero__visual { order: -1; }
   .panel__grid { grid-template-columns: 1fr; }
+  .metrics--4 { grid-template-columns: repeat(2, 1fr); }
   .flow { flex-direction: column; }
   .flow__arrow { transform: rotate(90deg); align-self: center; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }

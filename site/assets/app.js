@@ -309,6 +309,10 @@
       });
     },
     processUpgrade: function () {
+      if (!firebaseReady || !db) {
+        toast("Payments require Firebase configuration", "info");
+        return;
+      }
       if (!currentUser) {
         window.OccApp.closeModals();
         window.OccApp.showAuthModal();
@@ -329,6 +333,12 @@
     toggleAvatarDrop: function () {
       var d = document.getElementById("avatar-dropdown");
       if (d) d.classList.toggle("hidden");
+    },
+    loadClaritySample: function () {
+      var input = document.getElementById("clarity-input");
+      if (!input) return;
+      input.value = "Our cross-functional integrated solution empowers growth-stage teams to operationalize high-impact storytelling and scalable positioning across fragmented digital channels.";
+      toast("Example loaded", "info");
     },
     copySocial: function (platform) {
       var el = document.getElementById("social-" + platform + "-text");
@@ -476,13 +486,21 @@
     if (!product || !audience || !problem) { toast("Fill in at least product, audience, and problem", "info"); return; }
     recordUse("brand");
 
-    var toneAdj = { professional: "clear and authoritative", friendly: "warm and approachable", bold: "confident and direct", minimal: "concise and elegant" };
+    var toneAdj = {
+      calm: "clear and editorial",
+      direct: "confident and direct",
+      warm: "warm and approachable",
+      professional: "clear and authoritative",
+      friendly: "warm and approachable",
+      bold: "confident and direct",
+      minimal: "concise and elegant"
+    };
     var adj = toneAdj[tone] || "clear";
 
     var tagline = capitalize(problem.split(" ").slice(0, 3).join(" ")) + "? " + capitalize(product) + ".";
     var elevator = product + " helps " + audience + " solve " + problem + (outcome ? " so they can " + outcome : "") + ". Our approach is " + adj + ".";
     var headline = "Stop " + gerund(problem.split(" ")[0]) + ". Start " + gerund((outcome || "winning").split(" ")[0]) + ".";
-    var cta = tone === "bold" ? "Get started now →" : tone === "friendly" ? "Let's make it happen ✦" : "Learn more →";
+    var cta = (tone === "bold" || tone === "direct") ? "Get started now ->" : (tone === "friendly" || tone === "warm") ? "Let's make it happen" : "Learn more ->";
 
     document.getElementById("positioning-output").textContent = tagline;
     document.getElementById("value-output").textContent = elevator;
@@ -497,18 +515,21 @@
      TOOL 3 · UTM Builder
      ═══════════════════════════════════════════════════ */
   function runUTM() {
-    recordUse("utm");
     var base = document.getElementById("base-url").value.trim();
     var source = document.getElementById("utm-source").value.trim();
     var medium = document.getElementById("utm-medium").value.trim();
     var campaign = document.getElementById("utm-campaign").value.trim();
     var content = document.getElementById("utm-content").value.trim();
+    var term = document.getElementById("utm-term");
+    term = term ? term.value.trim() : "";
 
     if (!base || !source || !medium || !campaign) { toast("Fill in URL, source, medium, and campaign", "info"); return; }
+    recordUse("utm");
 
     var slug = function (s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/(^_|_$)/g, ""); };
     var params = "utm_source=" + encodeURIComponent(slug(source)) + "&utm_medium=" + encodeURIComponent(slug(medium)) + "&utm_campaign=" + encodeURIComponent(slug(campaign));
     if (content) params += "&utm_content=" + encodeURIComponent(slug(content));
+    if (term) params += "&utm_term=" + encodeURIComponent(slug(term));
 
     var sep = base.indexOf("?") === -1 ? "?" : "&";
     var full = base + sep + params;
@@ -979,6 +1000,9 @@
     var btnClarity = document.getElementById("btn-clarity");
     if (btnClarity) btnClarity.addEventListener("click", runClarity);
 
+    var btnClaritySample = document.getElementById("clarity-sample");
+    if (btnClaritySample) btnClaritySample.addEventListener("click", window.OccApp.loadClaritySample);
+
     var btnBrand = document.getElementById("btn-brand");
     if (btnBrand) btnBrand.addEventListener("click", runBrand);
 
@@ -1009,9 +1033,12 @@
     var btnSocial = document.getElementById("btn-social");
     if (btnSocial) btnSocial.addEventListener("click", runSocial);
 
-    /* Word Counter: live keyup */
+    /* Word Counter: live input */
     var counterInput = document.getElementById("counter-input");
-    if (counterInput) counterInput.addEventListener("keyup", runCounter);
+    if (counterInput) {
+      counterInput.addEventListener("input", runCounter);
+      runCounter();
+    }
   }
 
   if (document.readyState === "loading") {
