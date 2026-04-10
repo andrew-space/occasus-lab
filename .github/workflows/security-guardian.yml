@@ -40,7 +40,7 @@ jobs:
       - name: Ensure env files are not tracked
         run: |
           set -e
-          if git ls-files | grep -E "(^|/)(\.env|\.env\.[^.]+)$"; then
+          if git ls-files | grep -E "(^|/)\.env($|\.)" | grep -vE "\.env\.example$"; then
             echo "Tracked .env files are forbidden"
             exit 1
           fi

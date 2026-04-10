@@ -31,7 +31,9 @@ if (Test-Path $appJs) {
   }
 }
 
-$trackedEnv = git ls-files | Select-String -Pattern "(^|/)(\.env|\.env\.[^.]+)$" -CaseSensitive:$false
+$trackedEnv = git ls-files |
+  Select-String -Pattern "(^|/)\.env($|\.)" -CaseSensitive:$false |
+  Where-Object { $_.Line -notmatch "\.env\.example$" }
 if ($trackedEnv) {
   Write-Error "Tracked .env files detected"
 }
