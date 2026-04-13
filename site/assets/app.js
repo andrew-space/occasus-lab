@@ -792,7 +792,8 @@
       var el = document.getElementById("social-" + platform + "-text");
       if (!el || !el.textContent) return;
       navigator.clipboard.writeText(el.textContent).then(function () { toast("Copied!", "success"); }).catch(function () { toast("Copy failed", "error"); });
-    }
+    },
+    loadClarityVersion: loadClarityVersionById
   };
 
   /* close dropdown on outside click */
@@ -881,6 +882,112 @@
     "drill down": "examine", "key takeaway": "main point"
   };
   var FILLERS = ["very", "really", "just", "simply", "basically", "actually", "literally", "absolutely", "definitely", "certainly", "obviously", "clearly", "honestly"];
+  var CLARITY_HISTORY_KEY = "occ_clarity_versions";
+
+  function getClarityHistory() {
+    try {
+      var parsed = JSON.parse(localStorage.getItem(CLARITY_HISTORY_KEY) || "[]");
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setClarityHistory(items) {
+    localStorage.setItem(CLARITY_HISTORY_KEY, JSON.stringify(items));
+  }
+
+  function renderClarityHistory() {
+    var list = document.getElementById("clarity-history");
+    if (!list) return;
+    var items = getClarityHistory();
+    list.innerHTML = "";
+    if (!items.length) {
+      var empty = document.createElement("li");
+      empty.textContent = currentLang === "fr" ? "Aucune version enregistree" : "No saved versions yet";
+      list.appendChild(empty);
+      return;
+    }
+    items.forEach(function (v, i) {
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn btn--ghost btn--sm";
+      btn.setAttribute("data-clarity-id", v.id);
+      btn.textContent = (currentLang === "fr" ? "Version " : "Version ") + (items.length - i) + " - " + new Date(v.createdAt).toLocaleString();
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+  }
+
+  function saveClarityVersion() {
+    var input = (document.getElementById("clarity-input") || {}).value || "";
+    var output = (document.getElementById("clarity-output") || {}).textContent || "";
+    if (!output.trim()) {
+      toast(currentLang === "fr" ? "Genere d'abord une version" : "Generate a version first", "info");
+      return;
+    }
+
+    var items = getClarityHistory();
+    var max = isPro ? 50 : 3;
+    if (!isPro && items.length >= max) {
+      toast(currentLang === "fr" ? "Limite gratuite: 3 versions. Passe en Pro." : "Free limit: 3 saved versions. Upgrade to Pro.", "info");
+      window.OccApp.showUpgradeModal();
+      return;
+    }
+
+    var id = "cv-" + Date.now();
+    var version = {
+      id: id,
+      createdAt: new Date().toISOString(),
+      input: input,
+      output: output,
+      reduction: (document.getElementById("clarity-reduction") || {}).textContent || ""
+    };
+    items.unshift(version);
+    if (items.length > max) items = items.slice(0, max);
+    setClarityHistory(items);
+    renderClarityHistory();
+
+    if (firebaseReady && currentUser) {
+      db.collection("users").doc(currentUser.uid).collection("clarity_versions").doc(id).set(version).catch(function () {});
+    }
+
+    toast(currentLang === "fr" ? "Version enregistree" : "Version saved", "success");
+  }
+
+  function loadLatestClarityVersion() {
+    var items = getClarityHistory();
+    if (!items.length) {
+      toast(currentLang === "fr" ? "Aucune version enregistree" : "No saved version yet", "info");
+      return;
+    }
+    loadClarityVersionById(items[0].id);
+  }
+
+  function loadClarityVersionById(id) {
+    var items = getClarityHistory();
+    var found = items.find(function (v) { return v.id === id; });
+    if (!found) return;
+    var input = document.getElementById("clarity-input");
+    var output = document.getElementById("clarity-output");
+    if (input) input.value = found.input || "";
+    if (output) output.textContent = found.output || "";
+    if (found.input) {
+      var recomputed = rewriteClarity(found.input);
+      if (recomputed) {
+        document.getElementById("clarity-jargon").textContent = recomputed.jargon;
+        document.getElementById("clarity-fillers").textContent = recomputed.fillers;
+        document.getElementById("clarity-reduction").textContent = recomputed.reduction + "%";
+        var notesList = document.getElementById("clarity-notes");
+        if (notesList) {
+          notesList.innerHTML = "";
+          recomputed.notes.forEach(function (n) { var li = document.createElement("li"); li.textContent = n; notesList.appendChild(li); });
+        }
+      }
+    }
+    toast(currentLang === "fr" ? "Version chargee" : "Version loaded", "success");
+  }
 
   function rewriteClarity(text) {
     if (!text.trim()) return null;
@@ -1541,6 +1648,23 @@
 
     var btnClaritySample = document.getElementById("clarity-sample");
     if (btnClaritySample) btnClaritySample.addEventListener("click", window.OccApp.loadClaritySample);
+
+    var btnClaritySave = document.getElementById("clarity-save");
+    if (btnClaritySave) btnClaritySave.addEventListener("click", saveClarityVersion);
+
+    var btnClarityLoadLatest = document.getElementById("clarity-load-latest");
+    if (btnClarityLoadLatest) btnClarityLoadLatest.addEventListener("click", loadLatestClarityVersion);
+
+    var clarityHistory = document.getElementById("clarity-history");
+    if (clarityHistory) {
+      clarityHistory.addEventListener("click", function (e) {
+        var target = e.target;
+        if (target && target.getAttribute && target.getAttribute("data-clarity-id")) {
+          loadClarityVersionById(target.getAttribute("data-clarity-id"));
+        }
+      });
+      renderClarityHistory();
+    }
 
     var btnBrand = document.getElementById("btn-brand");
     if (btnBrand) btnBrand.addEventListener("click", runBrand);

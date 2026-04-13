@@ -292,10 +292,18 @@
             <div class="result-card">
               <span class="result-card__label">Rewritten version</span>
               <div id="clarity-output" aria-live="polite"></div>
+              <div class="form__actions" style="margin-top:.75rem;">
+                <button class="btn btn--ghost" type="button" id="clarity-save">Save version</button>
+                <button class="btn btn--ghost" type="button" id="clarity-load-latest">Load latest</button>
+              </div>
             </div>
             <div class="result-card result-card--accent">
               <span class="result-card__label">Editing moves</span>
               <ul id="clarity-notes" class="note-list"></ul>
+            </div>
+            <div class="result-card">
+              <span class="result-card__label">Saved versions</span>
+              <ul id="clarity-history" class="note-list"></ul>
             </div>
           </div>
         </div>
