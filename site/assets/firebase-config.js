@@ -20,19 +20,19 @@ var FIREBASE_CONFIG = {
 
 /* Freemium limits */
 var FREE_LIMITS = {
-  clarity: 5,
-  brand: 3,
+  clarity: 3,
+  brand: 1,
   utm: 999,
   tone: 0,
   headline: 0,
   counter: 999,
-  readability: 5,
-  email: 5,
-  seo: 5,
+  readability: 999,
+  email: 999,
+  seo: 999,
   social: 0
 };
 
-var PRO_PRICE = { monthly: 9, yearly: 79, currency: "€" };
+var PRO_PRICE = { monthly: 18, yearly: 180, currency: "€" };
 
 /* Server-side billing endpoint (Firebase Functions) */
 var BACKEND_CONFIG = {

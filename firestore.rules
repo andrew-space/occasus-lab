@@ -9,6 +9,10 @@ service cloud.firestore {
           request.resource.data.isPro == resource.data.isPro ||
           request.auth.token.admin == true
         );
+
+      match /clarity_versions/{versionId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
     }
 
     match /usage/{uid} {

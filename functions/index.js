@@ -23,6 +23,15 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
   .map((o) => o.trim())
   .filter(Boolean);
 
+function sanitizeReturnPath(pathValue) {
+  const raw = typeof pathValue === "string" ? pathValue.trim() : "";
+  if (!raw) return "/";
+  if (!raw.startsWith("/")) return "/";
+  if (raw.startsWith("//")) return "/";
+  if (raw.includes("..")) return "/";
+  return raw;
+}
+
 function setCors(req, res) {
   const origin = req.headers.origin || "";
   if (allowedOrigins.includes(origin)) {
@@ -63,6 +72,7 @@ exports.createCheckoutSession = onRequest({ region: "europe-west1" }, async (req
     const decoded = await requireAuth(req);
     const plan = (req.body && req.body.plan) || "";
     const origin = (req.body && req.body.origin) || "";
+    const returnPath = sanitizeReturnPath((req.body && req.body.returnPath) || "/");
 
     if (!["monthly", "yearly"].includes(plan)) {
       return safeJson(res, 400, { error: "invalid_plan" });
@@ -82,8 +92,8 @@ exports.createCheckoutSession = onRequest({ region: "europe-west1" }, async (req
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${origin}/?checkout=success`,
-      cancel_url: `${origin}/?checkout=cancel`,
+      success_url: `${origin}${returnPath}?checkout=success`,
+      cancel_url: `${origin}${returnPath}?checkout=cancel`,
       customer_email: customerEmail || undefined,
       metadata: {
         uid: decoded.uid,

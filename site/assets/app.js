@@ -759,7 +759,8 @@
           },
           body: JSON.stringify({
             plan: plan,
-            origin: window.location.origin
+            origin: window.location.origin,
+            returnPath: window.location.pathname || "/"
           })
         });
       }).then(function (res) {
